@@ -18,7 +18,12 @@ fun main() {
 
         try {
             val process = Runtime.getRuntime().exec(command)
-            println(BufferedReader(InputStreamReader(process.inputStream)).readLines().joinToString("\n"))
+
+            val inputStream = BufferedReader(InputStreamReader(process.inputStream)).readLines().joinToString("\n")
+            val errorStream = BufferedReader(InputStreamReader(process.errorStream)).readLines().joinToString("\n")
+
+            println(if (inputStream != "") inputStream else errorStream)
+
             process.waitFor()
         }
         catch (e : IOException) {
@@ -36,7 +41,7 @@ fun main() {
             }
 
             // TODO: Add an option for the error message
-            println("\"${command.joinToString()}\" is not a registered command, but these similar ones are; ${suggestions.joinToString(", ")}")
+            println("\"${command.joinToString()}\" is not a registered command, but these are; ${suggestions.joinToString(", ")}")
         }
     }
 }
