@@ -1,4 +1,4 @@
-package com.deflatedpickle.owo
+package com.deflatedpickle.whootm.terminal
 
 import org.eclipse.jface.window.ApplicationWindow
 import org.eclipse.swt.SWT

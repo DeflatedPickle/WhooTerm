@@ -1,4 +1,4 @@
-package com.deflatedpickle.owo
+package com.deflatedpickle.whootm.terminal
 
 fun main() {
     val window = Window()

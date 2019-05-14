@@ -34,3 +34,4 @@ gen
 
 # Other files
 libs/
+src/main/resources/fonts/*

@@ -1,19 +1,21 @@
-package com.deflatedpickle.uwu
+package com.deflatedpickle.whootm.shell
 
 import me.xdrop.fuzzywuzzy.FuzzySearch
-import java.io.BufferedReader
-import java.io.File
-import java.io.FilenameFilter
-import java.io.IOException
-import java.io.InputStreamReader
+import org.fusesource.jansi.Ansi
+import org.fusesource.jansi.AnsiConsole
+import java.io.*
 
 fun main() {
     while (true) {
+        AnsiConsole.systemInstall()
         // TODO: Add an option for the welcome message
         // TODO: Add an option for the prompt
-        print("\$ ")
+        print(Ansi.ansi().fgGreen().a("\$").fgDefault().a(" "))
+
+        // TODO: Add options for colours
 
         // TODO: Add pipes
+        // TODO: Add auto-completion (https://stackoverflow.com/questions/41212646/get-key-press-in-windows-console)
         val command = readLine()!!.trim().split(" ").toTypedArray()
 
         try {
@@ -22,7 +24,12 @@ fun main() {
             val inputStream = BufferedReader(InputStreamReader(process.inputStream)).readLines().joinToString("\n")
             val errorStream = BufferedReader(InputStreamReader(process.errorStream)).readLines().joinToString("\n")
 
-            println(if (inputStream != "") inputStream else errorStream)
+            if (inputStream != "") {
+                println(Ansi.ansi().fgCyan().a(inputStream))
+            }
+            else {
+                println(Ansi.ansi().fgRed().a(errorStream))
+            }
 
             process.waitFor()
         }
@@ -41,7 +48,7 @@ fun main() {
             }
 
             // TODO: Add an option for the error message
-            println("\"${command.joinToString()}\" is not a registered command, but these are; ${suggestions.joinToString(", ")}")
+            println(Ansi.ansi().fgYellow().a("\"${command.joinToString()}\" is not a registered command, but these are; ${suggestions.joinToString(", ")}"))
         }
     }
 }
