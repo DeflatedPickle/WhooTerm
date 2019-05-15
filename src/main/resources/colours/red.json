@@ -1,0 +1,25 @@
+{
+  "name": "Red",
+  "author": "DeflatedPickle",
+  "color": [
+    "#181814",
+    "#21201c",
+    "#32322c",
+    "#4a4942",
+    "#69675d",
+    "#8d8a7d",
+    "#b7b4a3",
+    "#e7e3ce",
+    "#d77160",
+    "#a09c80",
+    "#979fc3",
+    "#bfb87e",
+    "#c88880",
+    "#d9afcf",
+    "#a39c6d",
+    "#c9938d"
+  ],
+  "foreground": "#d0cdb9",
+  "background": "#0f0e0c"
+}
+

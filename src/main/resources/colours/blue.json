@@ -1,0 +1,25 @@
+{
+  "name": "Blue",
+  "author": "DeflatedPickle",
+  "color": [
+    "#121820",
+    "#1a212a",
+    "#29323f",
+    "#3d4a5c",
+    "#576880",
+    "#768cab",
+    "#a3b5cf",
+    "#dde3ed",
+    "#a29477",
+    "#c1b292",
+    "#cc6c78",
+    "#9db2d0",
+    "#6e9c6b",
+    "#d475d7",
+    "#de848e",
+    "#70839d"
+  ],
+  "foreground": "#c2cdde",
+  "background": "#0a0f14"
+}
+

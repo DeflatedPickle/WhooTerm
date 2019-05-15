@@ -38,10 +38,15 @@ dependencies {
     compile group: 'net.java.dev.jna', name: 'jna', version: '5.2.0'
     compile 'net.java.dev.jna:jna-platform:5.2.0'
 
-    implementation 'org.lwjgl:lwjgl:3.2.2'
+    implementation 'org.lwjgl.osgi:org.lwjgl.opengl:3.2.0'
+    implementation "org.joml:joml:1.9.12"
 
-    compile 'me.xdrop:fuzzywuzzy:1.2.0'
+    implementation 'me.xdrop:fuzzywuzzy:1.2.0'
     implementation 'com.github.fusesource.jansi:jansi:jansi-project-1.17'
+
+    implementation 'com.google.code.gson:gson:2.8.5'
+
+    compile files("libs/freetype-jni.jar")
 }
 
 configurations.all {
