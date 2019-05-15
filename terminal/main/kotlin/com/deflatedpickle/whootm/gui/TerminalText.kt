@@ -31,7 +31,7 @@ class TerminalText(parent: Composite, theme: Theme) :
                     commandBuffer.append(it.character)
                 }
                 else {
-                    ShellThread.commands.enqueue(commandBuffer.toString())
+                    ShellThread.commands.add(commandBuffer.toString())
                     commandBuffer.setLength(0)
                 }
             }
@@ -39,8 +39,8 @@ class TerminalText(parent: Composite, theme: Theme) :
 
         Display.getDefault().asyncExec(object : Runnable {
             override fun run() {
-                for (line in ShellThread.unreadLines.elements()) {
-                    text.text += ShellThread.unreadLines.dequeue() + "\n"
+                for (line in ShellThread.unreadLines.iterator()) {
+                    text.text += ShellThread.unreadLines.take() + "\n"
                     text.setSelection(text.text.length - 1)
                 }
 

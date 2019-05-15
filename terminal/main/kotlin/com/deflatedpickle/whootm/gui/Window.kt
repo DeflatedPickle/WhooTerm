@@ -52,7 +52,7 @@ class Window : ApplicationWindow(null) {
         // )
 
         // Cause the prompt to show
-        ShellThread.commands.enqueue("")
+        ShellThread.commands.add("")
 
         return super.createContents(parent)
     }
