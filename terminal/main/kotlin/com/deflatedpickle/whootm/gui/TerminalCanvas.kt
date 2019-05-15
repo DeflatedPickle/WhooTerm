@@ -1,6 +1,6 @@
-package com.deflatedpickle.whootm.terminal.gui
+package com.deflatedpickle.whootm.gui
 
-import com.deflatedpickle.whootm.terminal.Theme
+import com.deflatedpickle.whootm.Theme
 import org.eclipse.swt.SWT
 import org.eclipse.swt.opengl.GLCanvas
 import org.eclipse.swt.opengl.GLData

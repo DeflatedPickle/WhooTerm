@@ -1,4 +1,4 @@
-package com.deflatedpickle.whootm.terminal
+package com.deflatedpickle.whootm
 
 import sun.misc.Queue
 import java.util.concurrent.atomic.AtomicInteger

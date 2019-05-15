@@ -1,6 +1,6 @@
-package com.deflatedpickle.whootm.terminal
+package com.deflatedpickle.whootm
 
-import com.deflatedpickle.whootm.terminal.gui.Window
+import com.deflatedpickle.whootm.gui.Window
 
 fun main() {
     val shellThread = ShellThread()

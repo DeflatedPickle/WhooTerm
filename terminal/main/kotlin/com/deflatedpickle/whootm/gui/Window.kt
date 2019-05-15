@@ -1,14 +1,13 @@
-package com.deflatedpickle.whootm.terminal.gui
+package com.deflatedpickle.whootm.gui
 
-import com.deflatedpickle.whootm.terminal.ShellThread
-import com.deflatedpickle.whootm.terminal.TerminalUtil
-import com.deflatedpickle.whootm.terminal.Theme
-import com.deflatedpickle.whootm.terminal.font.Font
+import com.deflatedpickle.whootm.ShellThread
+import com.deflatedpickle.whootm.TerminalUtil
+import com.deflatedpickle.whootm.Theme
+import com.deflatedpickle.whootm.font.Font
 import com.google.gson.Gson
 import org.eclipse.jface.window.ApplicationWindow
 import org.eclipse.swt.events.ShellAdapter
 import org.eclipse.swt.events.ShellEvent
-import org.eclipse.swt.events.ShellListener
 import org.eclipse.swt.opengl.GLData
 import org.eclipse.swt.widgets.Composite
 import org.eclipse.swt.widgets.Control
@@ -18,7 +17,7 @@ class Window : ApplicationWindow(null) {
 
     val glData = GLData()
 
-    lateinit var terminalFont: Font
+    // lateinit var terminalFont: Font
 
     init {
         glData.doubleBuffer = true
@@ -51,6 +50,9 @@ class Window : ApplicationWindow(null) {
         //     ClassLoader.getSystemResource("fonts/iosevka-regular.ttf").path.substring(1),
         //     14f
         // )
+
+        // Cause the prompt to show
+        ShellThread.commands.enqueue("")
 
         return super.createContents(parent)
     }

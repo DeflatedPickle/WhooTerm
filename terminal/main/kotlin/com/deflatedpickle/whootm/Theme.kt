@@ -1,4 +1,4 @@
-package com.deflatedpickle.whootm.terminal
+package com.deflatedpickle.whootm
 
 class Theme {
     val name = ""

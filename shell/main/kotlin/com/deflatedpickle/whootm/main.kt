@@ -1,4 +1,4 @@
-package com.deflatedpickle.whootm.shell
+package com.deflatedpickle.whootm
 
 import me.xdrop.fuzzywuzzy.FuzzySearch
 import org.fusesource.jansi.Ansi

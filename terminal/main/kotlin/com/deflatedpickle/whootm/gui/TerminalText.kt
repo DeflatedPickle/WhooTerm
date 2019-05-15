@@ -1,14 +1,13 @@
-package com.deflatedpickle.whootm.terminal.gui
+package com.deflatedpickle.whootm.gui
 
-import com.deflatedpickle.whootm.terminal.ShellThread
-import com.deflatedpickle.whootm.terminal.Theme
+import com.deflatedpickle.whootm.ShellThread
+import com.deflatedpickle.whootm.Theme
 import org.eclipse.swt.SWT
 import org.eclipse.swt.custom.StyledText
 import org.eclipse.swt.graphics.Color
 import org.eclipse.swt.graphics.Font
 import org.eclipse.swt.widgets.Composite
 import org.eclipse.swt.widgets.Display
-import org.eclipse.swt.widgets.Text
 
 class TerminalText(parent: Composite, theme: Theme) :
     TerminalReceiver {
@@ -42,7 +41,7 @@ class TerminalText(parent: Composite, theme: Theme) :
             override fun run() {
                 for (line in ShellThread.unreadLines.elements()) {
                     text.text += ShellThread.unreadLines.dequeue() + "\n"
-                    text.setSelection(text.text.length)
+                    text.setSelection(text.text.length - 1)
                 }
 
                 Display.getDefault().asyncExec(this)

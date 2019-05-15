@@ -1,4 +1,4 @@
-package com.deflatedpickle.whootm.terminal.font
+package com.deflatedpickle.whootm.font
 
 class Glyph(
     val code: Char,

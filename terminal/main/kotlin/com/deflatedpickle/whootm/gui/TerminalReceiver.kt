@@ -1,7 +1,4 @@
-package com.deflatedpickle.whootm.terminal.gui
-
-import org.eclipse.swt.SWT
-import org.eclipse.swt.widgets.Text
+package com.deflatedpickle.whootm.gui
 
 interface TerminalReceiver {
     val textBuffer: StringBuffer
