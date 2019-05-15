@@ -1,6 +1,8 @@
 package com.deflatedpickle.whootm.terminal.font
 
-class Character(
+class Glyph(
+    val code: Char,
+    val index: Int,
     val advanceX: Float,
     val advanceY: Float,
     val bitmapWidth: Float,

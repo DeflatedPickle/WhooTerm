@@ -5,7 +5,6 @@ import com.mlomb.freetypejni.FreeTypeConstants
 import org.lwjgl.opengl.GL11
 import org.lwjgl.opengl.GL12
 import org.lwjgl.opengl.GL13
-import org.lwjgl.opengl.GL45
 import kotlin.math.max
 
 class FontAtlas(val fontFace: Face) {
@@ -14,7 +13,9 @@ class FontAtlas(val fontFace: Face) {
     var width = 0
     var height = 0
 
-    val imageAtlas = mutableMapOf<Char, Character>()
+    val imageAtlas = mutableMapOf<Char, Glyph>()
+
+    var exportFont = true
 
     init {
         // Credit: https://en.wikibooks.org/wiki/OpenGL_Programming/Modern_OpenGL_Tutorial_Text_Rendering_02
@@ -63,7 +64,7 @@ class FontAtlas(val fontFace: Face) {
                     glyph.bitmap.buffer
                 )
 
-                imageAtlas[i.toChar()] = Character(
+                imageAtlas[i.toChar()] = Glyph(i.toChar(), fontFace.getCharIndex(i),
                     (glyph.advance.x.toBigInteger() shr 6).toFloat(), (glyph.advance.y shr 6).toFloat(),
                     glyph.bitmap.width.toFloat(), glyph.bitmap.rows.toFloat(),
                     glyph.bitmapLeft.toFloat(), glyph.bitmapTop.toFloat(),

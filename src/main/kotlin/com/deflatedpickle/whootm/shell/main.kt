@@ -48,7 +48,7 @@ fun main() {
             }
 
             // TODO: Add an option for the error message
-            println(Ansi.ansi().fgYellow().a("\"${command.joinToString()}\" is not a registered command, but these are; ${suggestions.joinToString(", ")}"))
+            println(Ansi.ansi().fgYellow().a("\"${command.joinToString()}\" is not a registered command${if (suggestions.isNotEmpty()) ", but these are; ${suggestions.joinToString(", ")}" else ""}"))
         }
     }
 }
