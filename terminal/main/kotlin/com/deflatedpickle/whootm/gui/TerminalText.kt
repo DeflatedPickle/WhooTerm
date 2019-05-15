@@ -9,7 +9,11 @@ import org.eclipse.swt.graphics.Font
 import org.eclipse.swt.widgets.Composite
 import org.eclipse.swt.widgets.Display
 
-class TerminalText(parent: Composite, theme: Theme) :
+class TerminalText(parent: Composite, theme: Theme,
+                   override val textBuffer: StringBuffer = StringBuffer(1024),
+                   override val commandBuffer: StringBuffer = StringBuffer(1024 / 2),
+                   override val editableIndex: IntArray = IntArray(1)
+) :
     TerminalReceiver {
     val text = StyledText(parent, SWT.BORDER or SWT.H_SCROLL or SWT.V_SCROLL)
 
