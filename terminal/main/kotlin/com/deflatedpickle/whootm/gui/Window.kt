@@ -3,7 +3,6 @@ package com.deflatedpickle.whootm.gui
 import com.deflatedpickle.whootm.ShellThread
 import com.deflatedpickle.whootm.TerminalUtil
 import com.deflatedpickle.whootm.Theme
-import com.deflatedpickle.whootm.font.Font
 import com.google.gson.Gson
 import org.eclipse.jface.window.ApplicationWindow
 import org.eclipse.swt.events.ShellAdapter
@@ -52,7 +51,7 @@ class Window : ApplicationWindow(null) {
         // )
 
         // Cause the prompt to show
-        ShellThread.commands.add("")
+        ShellThread.commandQueue.add("")
 
         return super.createContents(parent)
     }
