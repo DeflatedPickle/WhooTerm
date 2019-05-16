@@ -19,6 +19,7 @@ class ShellThread : Runnable {
 
         var lineCount = AtomicInteger(0)
         var unreadLines = LinkedBlockingQueue<String>()
+        var previousCommand = ""
 
         val shell = Runtime.getRuntime().exec(shellName)
 
@@ -31,18 +32,42 @@ class ShellThread : Runnable {
 
     override fun run() {
         while (run) {
+            // Constantly writes to the shell, keeping it responsive
             shellIn.write("echo --EOF--\n")
             shellIn.flush()
 
+            // Runs through the commands sent from the terminal
             for (i in commands.iterator()) {
-                shellIn.write("${commands.take()}\n")
+                val command = commands.take()
+
+                if (command != "") {
+                    shellIn.write("$command\n")
+                    // Causes another prompt to show
+                    shellIn.write("\n")
+                    shellIn.flush()
+                    previousCommand = command
+                }
+                else {
+                    shellIn.write("\n")
+                }
             }
 
+            // Constantly reads from the shell, ignoring the constant writes
             var line = shellOut.readLine()
             while (line != null && line.trim() != "--EOF--") {
                 if (!line.contains("--EOF--") && line !in listOf("", " ", "\n")) {
-                    unreadLines.add(line)
-                    lineCount.set(lineCount.get() + 1)
+                    // Makes sure the welcome text is shown
+                    if (previousCommand == "") {
+                        unreadLines.add(line)
+                        lineCount.set(lineCount.get() + 1)
+                    }
+                    else {
+                        // Stops from sending the prompt and command
+                        if (!line.contains(previousCommand)) {
+                            unreadLines.add(line)
+                            lineCount.set(lineCount.get() + 1)
+                        }
+                    }
                 }
                 line = shellOut.readLine()
             }
