@@ -34,4 +34,4 @@ gen
 
 # Other files
 libs/
-terminal/main/resources/fonts/*
+terminal/src/main/resources/fonts/*

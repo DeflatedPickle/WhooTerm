@@ -1,16 +1,18 @@
 package com.deflatedpickle.whootm
 
 import me.xdrop.fuzzywuzzy.FuzzySearch
+import org.apache.commons.lang3.SystemUtils
 import org.fusesource.jansi.Ansi
 import org.fusesource.jansi.AnsiConsole
 import java.io.*
 
 fun main() {
     while (true) {
+        // TODO: Add an option
         AnsiConsole.systemInstall()
         // TODO: Add an option for the welcome message
         // TODO: Add an option for the prompt
-        print(Ansi.ansi().fgGreen().a("\$").fgDefault().a(" "))
+        print(Ansi.ansi().fgGreen().a("[${System.getProperty("user.dir")}] ~>").fgDefault().a(" "))
 
         // TODO: Add options for colours
 
@@ -39,7 +41,7 @@ fun main() {
             for (dir in System.getenv("PATH").split(";")) {
                 val dirFile = File(dir)
                 if (dirFile.isDirectory) {
-                    for (file in dirFile.listFiles(FilenameFilter { dir, name -> name.endsWith("exe") })) {
+                    for (file in dirFile.listFiles(FilenameFilter { _, name -> name.endsWith("exe") })) {
                         if (FuzzySearch.partialRatio(command.first(), file.nameWithoutExtension) > 80) {
                             suggestions.add(file.name)
                         }
