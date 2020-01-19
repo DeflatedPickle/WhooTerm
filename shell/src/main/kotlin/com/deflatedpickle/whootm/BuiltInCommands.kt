@@ -1,8 +1,15 @@
 package com.deflatedpickle.whootm
 
-import org.apache.commons.lang3.StringUtils
-import org.fusesource.jansi.Ansi
+import de.vandermeer.asciitable.AsciiTable
+import de.vandermeer.asciitable.CWC_LongestLine
+import de.vandermeer.asciithemes.u8.U8_Grids
+import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment
+import org.apache.commons.io.FileUtils
+import org.apache.tika.Tika
 import java.io.File
+import java.nio.file.Files
+import java.nio.file.attribute.BasicFileAttributes
+import java.text.SimpleDateFormat
 
 // TODO: Move these to a scripting language
 enum class BuiltInCommands {
@@ -16,7 +23,7 @@ enum class BuiltInCommands {
                 Logger.error("\"${args[0]}\" isn't a valid directory")
                 return false
             }
-            Logger.error("No directory was specified")
+            Logger.error("No directory has been specified")
             return false
         }
     },
@@ -24,16 +31,38 @@ enum class BuiltInCommands {
         override fun execute(args: List<String>): Boolean {
             val files = mutableListOf<File>()
             var longest = 0
-            for (i in File(System.getProperty("user.dir")).listFiles()) {
+
+            for (i in userFiles) {
                 if (i.name.length > longest) {
                     longest = i.name.length
                 }
                 files.add(i)
             }
 
-            for (i in files) {
-                Logger.info("${i.name} ${StringUtils.repeat(".", longest + 1 - i.name.length)} [${if (i.isFile) "File" else "Directory"}]")
+            AsciiTable().apply {
+                addRow("Name", "Size", "Type", "Last Modified", "Created").apply {
+                    setTextAlignment(TextAlignment.CENTER)
+                }
+                addStrongRule()
+
+                for (i in files) {
+                    val attributes = Files.readAttributes(i.toPath(), BasicFileAttributes::class.java)
+
+                    addRow(
+                        i.name,
+                        FileUtils.byteCountToDisplaySize(i.length().toInt()),
+                        if (i.isFile) tika.detect(i) else "directory",
+                        dateFormat.format(i.lastModified()),
+                        dateFormat.format(attributes.creationTime().toMillis())
+                    )
+                    addRule()
+                }
+
+                renderer.cwc = CWC_LongestLine()
+                context.grid = U8_Grids.borderStrongDoubleLight()
+                println(render())
             }
+
             return true
         }
     },
@@ -44,10 +73,18 @@ enum class BuiltInCommands {
     },
     EXIT {
         override fun execute(args: List<String>): Boolean {
-            GlobalValues.run = false
+            Shell.run = false
             return true
         }
     };
 
     abstract fun execute(args: List<String>): Boolean
+
+    companion object {
+        val tika = Tika()
+
+        val dateFormat = SimpleDateFormat("MM/dd/yyyy HH:mm:ss")
+
+        val userFiles = File(System.getProperty("user.dir")).listFiles()
+    }
 }

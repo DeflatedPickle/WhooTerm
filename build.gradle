@@ -70,6 +70,13 @@ project("shell") {
         implementation 'com.github.fusesource.jansi:jansi:jansi-project-1.17'
         // TermIOS wrapper
         implementation 'com.github.purejavacomm:purejavacomm:1.0.2.RELEASE'
+        // ASCII tables
+        implementation 'de.vandermeer:asciitable:0.3.2'
+
+        // Apache Commons
+        implementation 'commons-io:commons-io:20030203.000550'
+        // Apache Tika
+        implementation 'org.apache.tika:tika-core:1.23'
     }
 }
 

@@ -17,7 +17,7 @@ class Shell {
         var process: Process? = null
 
         fun prompt(): String {
-            return "[${System.getProperty("user.dir")}] ~>"
+            return "[${System.getProperty("user.dir")}] ~> "
         }
     }
 
@@ -64,7 +64,7 @@ class Shell {
                     for (dir in System.getenv("PATH").split(";")) {
                         val dirFile = File(dir)
                         if (dirFile.isDirectory) {
-                            for (file in dirFile.listFiles { _, name -> name.endsWith("exe") }) {
+                            for (file in dirFile.listFiles { _, name -> name.split(".").last() in arrayOf("exe", "bat") }) {
                                 if (FuzzySearch.partialRatio(command, file.nameWithoutExtension) > 80) {
                                     suggestions.add(file.name)
                                 }
